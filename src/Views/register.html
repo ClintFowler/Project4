@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Project 3</title>
-        <link rel="stylesheet" type="text/css" href="css\Style.css">		
+        <link rel="stylesheet" type="text/css" href="css\Style.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="scripts/register.js"></script>
     </head>
     <body>
         <div align="center">
@@ -12,27 +14,27 @@
 			<form>
 <table>
 	<tr>
-		<td align="right">First Name:</td>
+		<td align="right"><div id="ffield">First Name:</td>
 			<td align="left"><input class="textbox" type="text" id="firstname" name="firstname" size="15"/></td>
 	</tr>
 	<tr>
-		<td align="right">Last Name:</td>
+		<td align="right"><div id="lfield">Last Name:</td>
 			<td align="left"><input class="textbox" type="text" id="lastname" name="lastname" size="15"/></td>
 	</tr>
 	<tr>
-		<td align="right">Email: </td>
-			<td align="left"><input class="textbox" type="text" id="email" name="email" size="15"/></td>
+		<td align="right"><div id="tfield">Twitter ID: </td>
+			<td align="left"><input class="textbox" type="text" id="twitter" name="twiiter" size="15"/></td>
 	</tr>
 	<tr>
-        <td align="right">Create Username:</td>
+        <td align="right"><div id="ufield">Create Username:</td>
 			<td align="left"><input class="textbox" type="text" id="username" name="username" size="15" onkeyup="show(this.value)"></td>
 	</tr>
 	<tr>
-		<td align="right">Create Password:</td>
+		<td align="right"><div id="pfield">Create Password:</td>
 			<td align="left"><input class="textbox" type="password" id="password" name="password" size="15"></td>
 	</tr>
 </table>                
-                <p><input class="button" type="submit" value="Register" /></p><br /><br />
+                <p><input class="button" value="Register" onclick="register()"/></p><br /><br />
             </form>
         </div>
     </body>

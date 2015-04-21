@@ -58,12 +58,21 @@ class InSqLite implements IAuthentication
     }
 
 
-    public function registerUser($user, $pass)
+    public function registerUser($user, $pass, $first, $last, $twitter)
     {
         $this->responsecode = 401;
 
-        $query ="insert into users(username,password)values(".$user.",".$pass.")";
-
+        $query = $this->dbh->prepare("insert into users(username,password,fname,lname,twitteruser)values(?,?,?,?,?)");
+        $testing = $query->execute(array($user,$pass,$first,$last,$twitter));
+        if($testing)
+        {
+            $this->responsecode = 201;
+        }
+        else
+        {
+            $this->responsecode = 409;
+        }
+        return $this->responsecode;
     }
 
     /**

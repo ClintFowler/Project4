@@ -21,8 +21,9 @@ function myFunction() {
 				// ok
 				200: function(){
 					//alert('access granted');
-					document.getElementById("message").innerHTML = "access granted";
-					$("#registerlink").hide();
+					//document.getElementById("message").innerHTML = "access granted";
+					//$("#registerlink").hide();
+					window.location.replace("http://localhost:8080/profiles/" + username);
 				},
 				// unauthorized
 				401: function(){

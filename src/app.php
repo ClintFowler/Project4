@@ -29,9 +29,9 @@ $app->post('/auth', function()
     $check->authenticate(htmlentities($_POST['username']),htmlentities($_POST['password']));
 });
 
-$app->get('/profiles/:id', function()
+$app->get('/profiles/:id', function($name)
 {
-    //TODO: create profile page "will need to be dynamic, fragments?"
+    echo $name;
 });
 
 $app->get('/register', function()
@@ -104,9 +104,75 @@ $app->post('/api/auth',  function() use($app)
 });
 
 //registration service
-$app->post('/api/register', function()
+$app->post('/api/register', function() use($app)
 {
+    echo'you sent me something';
     $register = new \Common\Authentication\InSqLite();
+    $postuser = " ";
+    $postpass = " ";
+    $postfirst = " ";
+    $postlast = " ";
+    $posttwitter = " ";
+    if(json_decode($body = $app->request->getBody()) != NULL)
+    {
+        if(isset($body["username"]))
+        {
+            $postuser = $body["username"];
+        }
+        if(isset($body["password"]))
+        {
+            $postpass = $body["password"];
+        }
+        if(isset($body["first"]))
+        {
+            $postfirst = $body["first"];
+        }
+        if(isset($body["last"]))
+        {
+            $postlast = $body["last"];
+        }
+        if(isset($body["twitteruser"]))
+        {
+            $posttwitter = $body["twitteruser"];
+        }
+    }
+    else
+    {
+        if($app->request->params('username'))
+        {
+            $postuser = $app->request->params('username');
+        }
+        if($app->request->params('password'))
+        {
+            $postpass = $app->request->params('password');
+        }
+        if($app->request->params('first'))
+        {
+            $postfirst = $app->request->params('first');
+        }
+        if($app->request->params('last'))
+        {
+            $postlast = $app->request->params('last');
+        }
+        if($app->request->params('twitteruser'))
+        {
+            $posttwitter = $app->request->params('twitteruser');
+        }
+    }
+
+    $response = $register->registerUser($postuser,$postpass,$postfirst,$postlast,$posttwitter);
+    if($response == 200)
+    {
+        $app->response->setStatus(201);
+        return json_encode($app->response->header("Profile: HTTP://localhost:8080/profiles/".$postuser, 200));
+    }
+    if($response == 409)
+    {
+        $app->response->setStatus(409);
+        return json_encode($app->response->header("Need to register?: http://localhost:8080/register", 401));
+    }
+    $app->response->setStatus(500);
+    return json_encode($app->response->header("OOPS Something on our side failed", 500));
 });
 
 //Authentication point for twitter.... Needed or embedded function?
