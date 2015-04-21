@@ -3,37 +3,39 @@
     <head>
         <meta charset="UTF-8">
         <title>Project 3</title>
-        <link rel="stylesheet" type="text/css" href="css\Style.css">		
+        <link rel="stylesheet" type="text/css" href="css\Style.css">
+		<script src="scripts/validate.js"></script>
     </head>
     <body>
         <div align="center">
 			<h1>Register for Site</h1>
           
-			<form>
-<table>
-	<tr>
-		<td align="right">First Name:</td>
-			<td align="left"><input class="textbox" type="text" id="firstname" name="firstname" size="15"/></td>
-	</tr>
-	<tr>
-		<td align="right">Last Name:</td>
-			<td align="left"><input class="textbox" type="text" id="lastname" name="lastname" size="15"/></td>
-	</tr>
-	<tr>
-		<td align="right">Email: </td>
-			<td align="left"><input class="textbox" type="text" id="email" name="email" size="15"/></td>
-	</tr>
-	<tr>
-        <td align="right">Create Username:</td>
-			<td align="left"><input class="textbox" type="text" id="username" name="username" size="15" onkeyup="show(this.value)"></td>
-	</tr>
-	<tr>
-		<td align="right">Create Password:</td>
-			<td align="left"><input class="textbox" type="password" id="password" name="password" size="15"></td>
-	</tr>
-</table>                
-                <p><input class="button" type="submit" value="Register" /></p><br /><br />
-            </form>
+			<form id="registerForm">
+				<table>
+					<tr>
+						<td align="right">First Name:</td>
+							<td align="left"><input class="textbox" type="text" id="firstname" name="firstname" size="15"/></td>
+					</tr>
+					<tr>
+						<td align="right">Last Name:</td>
+							<td align="left"><input class="textbox" type="text" id="lastname" name="lastname" size="15"/></td>
+					</tr>
+					<tr>
+						<td align="right">Email: </td>
+							<td align="left"><input class="textbox" type="text" id="email" name="email" size="15"/></td>
+					</tr>
+					<tr>
+						<td align="right">Create Username:</td>
+							<td align="left"><input class="textbox" type="text" id="username" name="username" size="15" onkeyup="show(this.value)"></td>
+					</tr>
+					<tr>
+						<td align="right">Create Password:</td>
+							<td align="left"><input class="textbox" type="password" id="password" name="password" size="15"></td>
+					</tr>
+				</table>                
+                <p><input class="button" type="submit" value="Register" onclick="validateForm()"/></p><br /><br />
+            </form><br/>
+			<p id="registerMessage"></p>
         </div>
     </body>
 </html>
