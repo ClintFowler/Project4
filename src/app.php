@@ -32,6 +32,7 @@ $app->post('/auth', function()
 $app->get('/profiles/:id', function()
 {
     //TODO: create profile page "will need to be dynamic, fragments?"
+	require_once realpath(__DIR__.DIRECTORY_SEPARATOR.'Views'.DIRECTORY_SEPARATOR.'profiles.html');
 });
 
 $app->get('/register', function()
