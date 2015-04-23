@@ -60,7 +60,7 @@ class InSqLite implements IAuthentication
 
     public function registerUser($user, $pass, $first, $last, $twitter)
     {
-        $this->responsecode = 401;
+        $this->responsecode = 201;
 
         $query = $this->dbh->prepare("insert into users(username,password,fname,lname,twitteruser)values(?,?,?,?,?)");
         $testing = $query->execute(array($user,$pass,$first,$last,$twitter));
@@ -72,7 +72,17 @@ class InSqLite implements IAuthentication
         {
             $this->responsecode = 409;
         }
+        $query->closeCursor();
         return $this->responsecode;
+    }
+
+    public function getProfile($user)
+    {
+        $query = "select * from users where username='".$user."'";
+        $search = $this->dbh->query($query);
+        $row = $search->fetch(PDO::FETCH_ASSOC);
+        $search->closeCursor();
+        return $row;
     }
 
     /**

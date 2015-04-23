@@ -29,9 +29,15 @@ $app->post('/auth', function()
     $check->authenticate(htmlentities($_POST['username']),htmlentities($_POST['password']));
 });
 
-$app->get('/profiles/:id', function($name)
+$app->get('/profiles/:id', function($name) use($app)
 {
-    echo $name;
+    //echo $name;
+    require_once realpath(__DIR__.DIRECTORY_SEPARATOR.'Views'.DIRECTORY_SEPARATOR.'test.html');
+    // Take $name and query db for data
+    // Convert db data to JSON
+    // Create or use a response object
+    // Load JSON into response body
+    // Send the response
 });
 
 $app->get('/register', function()
@@ -103,10 +109,32 @@ $app->post('/api/auth',  function() use($app)
     return json_encode($app->response->header("OOPS Something on our side failed", 500));
 });
 
+$app->post('/api/profile', function() use($app)
+{
+    $userID = ' ';
+    if(json_decode($body = $app->request->getBody()) != NULL)
+    {
+        $userID = $body["username"];
+    }
+    else
+    {
+        if($app->request->params("username"))
+        {
+            $userID = $app->request->params("username");
+        }
+    }
+    //echo $userID;
+    $profile = new \Common\Authentication\InSqLite();
+    $userprofile = $profile->getProfile($userID);
+    //var_dump($userprofile);
+    $app->response->setBody(json_encode($userprofile));
+    $app->response->setStatus(200);
+});
+
 //registration service
 $app->post('/api/register', function() use($app)
 {
-    echo'you sent me something';
+    echo 'you sent me something';
     $register = new \Common\Authentication\InSqLite();
     $postuser = " ";
     $postpass = " ";
@@ -161,7 +189,7 @@ $app->post('/api/register', function() use($app)
     }
 
     $response = $register->registerUser($postuser,$postpass,$postfirst,$postlast,$posttwitter);
-    if($response == 200)
+    if($response == 201)
     {
         $app->response->setStatus(201);
         return json_encode($app->response->header("Profile: HTTP://localhost:8080/profiles/".$postuser, 200));
