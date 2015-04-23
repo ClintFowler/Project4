@@ -2,34 +2,72 @@
 	<head>
 	<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="css\Style.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script>$(document).ready(function(){
+			var url = unescape(document.location);
+			var profilename = url.split('/');
+			$('#user').text( profilename[4] + " Profile Page");
+			$('#user').css('color','blue');
+			var dataString= 'username=' + profilename[4];
+			$.ajax({
+				type: "POST",
+				url: "http://localhost:8080/api/profile",
+				data: dataString,
+				cache: false,
+				dataType:'JSON',
+				success: function(data)
+				{
+					$('#firstname').text(data.fname);
+					$('#lastname').text(data.lname);
+					$('#twitter').text(data.twitteruser);
+					$('#email').text(data.email);
+					$('#date').text(data.registered);
+				}
+			});
+		});</script>
 	</head>
 	<body>
-		<h1>Profile Page</h1>
-		<table>
-			<tr>
-				<td align="right">Username:</td>
-					<td align="left"><input class="textbox" type="text" id="username" name="username" size="15"/></td>
-			</tr>
-			<tr>
-				<td align="right">First Name:</td>
-					<td align="left"><input class="textbox" type="text" id="firstname" name="firstname" size="15"/></td>
-			</tr>
-			<tr>
-				<td align="right">Last Name:</td>
-					<td align="left"><input class="textbox" type="text" id="lastname" name="lastname" size="15"/></td>
-			</tr>
-			<tr>
-				<td align="right">Email: </td>
-					<td align="left"><input class="textbox" type="text" id="email" name="email" size="15"/></td>
-			</tr>
-			<tr>
-				<td align="right">Twitter Username: </td>
-					<td align="left"><input class="textbox" type="text" id="twitter" name="twitter" size="15"/></td>
-			</tr>
-			<tr>
-				<td align="right">Registration Date: </td>
-					<td align="left"><input class="textbox" type="text" id="date" name="date" size="15"/></td>
-			</tr>
-		</table>
+	<table width="100%">
+		<tr>
+			<td></td>
+			<td colspan="2"><h1><div id="user"></div></h1></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><div></div></td>
+			<td><div></div></td>
+			<td><div></div></td>
+			<td><div></div></td>
+		</tr>
+		<tr>
+			<td><img src="/pictures/Chuck.jpg" width="500" height="300"></td>
+			<td colspan="3">
+				<table>
+					<tr>
+						<td align="right"><b>First Name: </b></td>
+						<td align="left"><div id="firstname" size="15"/></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Last Name: </b></td>
+						<td align="left"><div id="lastname" size="15"/></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Email: </b></td>
+						<td align="left"><div id="email" size="15"/></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Twitter Username: </b></td>
+						<td align="left"><div id="twitter" size="15"/></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Registration Date: </b></td>
+						<td align="left"><div id="date" size="15"/></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+
 	</body>
 </html>

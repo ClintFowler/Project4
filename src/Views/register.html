@@ -2,38 +2,42 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Project 3</title>
+        <title>Project 4</title>
         <link rel="stylesheet" type="text/css" href="css\Style.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="scripts/validate.js"></script>
     </head>
     <body>
         <div align="center">
 			<h1>Register for Site</h1>
-          
 			<form id="registerForm">
 				<table>
 					<tr>
-						<td align="right">First Name:</td>
+						<td align="right"><div id="ffield">First Name:</div></td>
 							<td align="left"><input class="textbox" type="text" id="firstname" name="firstname" size="15"/></td>
 					</tr>
 					<tr>
-						<td align="right">Last Name:</td>
+						<td align="right"><div id="lfield">Last Name:</div></td>
 							<td align="left"><input class="textbox" type="text" id="lastname" name="lastname" size="15"/></td>
 					</tr>
 					<tr>
-						<td align="right">Email: </td>
+						<td align="right"><div id="efield">Email:</div></td>
 							<td align="left"><input class="textbox" type="text" id="email" name="email" size="15"/></td>
 					</tr>
 					<tr>
-						<td align="right">Create Username:</td>
+						<td align="right"><div id="efield">Twitter Handle:</div></td>
+						<td align="left"><input class="textbox" type="text" id="twitter" name="twitter" size="15"/></td>
+					</tr>
+					<tr>
+						<td align="right"><div id="ufield">Create Username:</div></td>
 							<td align="left"><input class="textbox" type="text" id="username" name="username" size="15" onkeyup="show(this.value)"></td>
 					</tr>
 					<tr>
-						<td align="right">Create Password:</td>
+						<td align="right"><div id="pfield">Create Password:</div></td>
 							<td align="left"><input class="textbox" type="password" id="password" name="password" size="15"></td>
 					</tr>
 				</table>                
-                <p><input class="button" type="submit" value="Register" onclick="validateForm()"/></p><br /><br />
+                <p><button type="button" onclick="validateForm()" class="button">Register </button></p>
             </form><br/>
 			<p id="registerMessage"></p>
         </div>
