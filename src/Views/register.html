@@ -2,10 +2,9 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Project 4 - Registration</title>
+        <title>Project 4</title>
         <link rel="stylesheet" type="text/css" href="css\Style.css">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="scripts/register.js"></script>
 		<script src="scripts/validate.js"></script>
     </head>
     <body>
@@ -22,8 +21,12 @@
 							<td align="left"><input class="textbox" type="text" id="lastname" name="lastname" size="15"/></td>
 					</tr>
 					<tr>
-						<td align="right"><div id="tfield">Email:</div></td>
-							<td align="left"><input class="textbox" type="text" id="twitter" name="twitter" size="15"/></td>
+						<td align="right"><div id="efield">Email:</div></td>
+							<td align="left"><input class="textbox" type="text" id="email" name="email" size="15"/></td>
+					</tr>
+					<tr>
+						<td align="right"><div id="efield">Twitter Handle:</div></td>
+						<td align="left"><input class="textbox" type="text" id="twitter" name="twitter" size="15"/></td>
 					</tr>
 					<tr>
 						<td align="right"><div id="ufield">Create Username:</div></td>
@@ -34,8 +37,7 @@
 							<td align="left"><input class="textbox" type="password" id="password" name="password" size="15"></td>
 					</tr>
 				</table>                
-                <p><input class="button" type="submit" value="Register" onclick="validateForm()"/></p><br /><br />
-				<p><input class="button" value="Register" onclick="register()"/></p><br /><br />
+                <p><button type="button" onclick="validateForm()" class="button">Register </button></p>
             </form><br/>
 			<p id="registerMessage"></p>
         </div>

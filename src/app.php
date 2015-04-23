@@ -31,13 +31,7 @@ $app->post('/auth', function()
 
 $app->get('/profiles/:id', function($name) use($app)
 {
-    //echo $name;
-    require_once realpath(__DIR__.DIRECTORY_SEPARATOR.'Views'.DIRECTORY_SEPARATOR.'test.html');
-    // Take $name and query db for data
-    // Convert db data to JSON
-    // Create or use a response object
-    // Load JSON into response body
-    // Send the response
+	require_once realpath(__DIR__.DIRECTORY_SEPARATOR.'Views'.DIRECTORY_SEPARATOR.'profiles.html');
 });
 
 $app->get('/register', function()
@@ -141,6 +135,7 @@ $app->post('/api/register', function() use($app)
     $postfirst = " ";
     $postlast = " ";
     $posttwitter = " ";
+    $postemail = " ";
     if(json_decode($body = $app->request->getBody()) != NULL)
     {
         if(isset($body["username"]))
@@ -162,6 +157,10 @@ $app->post('/api/register', function() use($app)
         if(isset($body["twitteruser"]))
         {
             $posttwitter = $body["twitteruser"];
+        }
+        if(isset($body["email"]))
+        {
+            $postemail = $body["email"];
         }
     }
     else
@@ -186,9 +185,13 @@ $app->post('/api/register', function() use($app)
         {
             $posttwitter = $app->request->params('twitteruser');
         }
+        if($app->request->params('email'))
+        {
+            $postemail = $app->request->params('email');
+        }
     }
 
-    $response = $register->registerUser($postuser,$postpass,$postfirst,$postlast,$posttwitter);
+    $response = $register->registerUser($postuser,$postpass,$postfirst,$postlast,$posttwitter,$postemail);
     if($response == 201)
     {
         $app->response->setStatus(201);
